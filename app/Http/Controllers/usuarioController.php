@@ -6,10 +6,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Contato;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage; // Essencial para gerenciar arquivos
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class usuarioController extends Controller
 {
+
+public function login(Request $request)
+{
+    
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'senha' => ['required'],
+    ]);
+
+    
+    $loginCredentials = [
+        'email' => $credentials['email'],
+        'password' => $credentials['senha'],
+    ];
+
+    
+    if (Auth::attempt($loginCredentials)) {
+        $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        if ($user->tipo === 'admin') {
+            return redirect()->intended(route('dashboard'));
+        }
+
+        return redirect()->intended('/');
+    }
+
+    return back()->withErrors([
+        'email' => 'As credenciais fornecidas não correspondem aos nossos registros.',
+    ])->onlyInput('email');
+}
+    
     public function store(Request $request)
     {
        $validator = Validator::make($request->all(), [
@@ -25,28 +59,28 @@ class usuarioController extends Controller
             return response()->json([
                 'message' => 'Erro de validação',
                 'errors' => $validator->errors()
-            ], 422); // Código 422 indica erro de validação
+            ], 422);
         }
 
-        // 3. <-- CORREÇÃO: Pegar os dados validados
+        
         $data = $validator->validated();
 
-        // 4. <-- CORREÇÃO: Criptografar a senha antes de salvar
+        
         $data['senha'] = Hash::make($data['senha']);
 
-        // 5. Criar o contato no banco de dados
+        
         $contato = Contato::create($data);
 
-        // 6. Preparar a mensagem de sucesso
+        
         $message = ($data['tipo'] ?? 'cliente') === 'admin'
             ? 'Contato administrativo cadastrado com sucesso!'
             : 'Cadastro realizado com sucesso!';
 
-        // 7. Retornar a resposta de sucesso
+        
         return response()->json([
             'message' => $message,
             'data' => $contato
-        ], 201); // Código 201 indica que um recurso foi criado
+        ], 201);
     }
 
 }

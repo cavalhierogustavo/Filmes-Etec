@@ -6,10 +6,10 @@
    <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>CINEMAX — Cadastro</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Se o seu CSS estiver na pasta public/css, o link deve ser assim: -->
+  
   <link rel="stylesheet" href="{{ asset('css/cadastro.css') }}">
   <style>
-    /* Estilos para as mensagens de feedback */
+    
     .feedback-message {
       padding: 1rem;
       border-radius: 8px;
@@ -78,6 +78,8 @@
       
       <form id="cadastroForm" action="{{route('cadastro.store')}}" method="post">
        @csrf
+       <input type="hidden" name="tipo" value="admin">
+       <input type="hidden" name="deleted" value="0">
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
 
@@ -105,29 +107,28 @@
 </head>
 
 <script>
-    // Seleciona o formulário e a div de feedback
+    
     const form = document.getElementById('cadastroForm');
     const feedbackDiv = document.getElementById('feedback');
 
-    // Adiciona um "ouvinte" para o evento de envio do formulário
+    
     form.addEventListener('submit', function (event) {
-        // 1. Previne o envio padrão (que recarrega a página)
+        
         event.preventDefault();
 
-        // Limpa mensagens antigas
+        
         feedbackDiv.style.display = 'none';
         feedbackDiv.innerHTML = '';
         feedbackDiv.className = 'feedback-message';
 
-        // 2. Pega os dados do formulário
         const formData = new FormData(form);
 
-        // 3. Envia os dados usando Fetch API (AJAX)
+
         fetch('{{ route('cadastro.store') }}', {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Accept': 'application/json', // Informa que esperamos JSON
+                'Accept': 'application/json',
             },
             body: formData
         })

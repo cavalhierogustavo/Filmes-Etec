@@ -12,7 +12,7 @@
         :root {
             --bg: #0b0b0b;
             --card: #141414;
-            --border: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.08 );
             --text: #ffffff;
             --muted: #bfc4c9;
             --accent: #e50914;
@@ -24,6 +24,36 @@
             margin: 0;
             padding: 2rem;
         }
+        /* --- NOVO ESTILO PARA O CABEÇALHO --- */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem auto;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .dashboard-header .user-info {
+            color: var(--muted);
+        }
+        .dashboard-header .logout-button {
+            background-color: var(--accent);
+            color: var(--text);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none; /* Para o caso de usar um link estilizado */
+            font-size: 0.9rem;
+        }
+        .dashboard-header .logout-button:hover {
+            opacity: 0.9;
+        }
+        /* --- FIM DO NOVO ESTILO --- */
+
         .dashboard-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -81,6 +111,25 @@
     </style>
 </head>
 <body>
+
+    <!-- =============================================== -->
+    <!-- INÍCIO DA SEÇÃO ADICIONADA: CABEÇALHO E LOGOUT   -->
+    <!-- =============================================== -->
+    <div class="dashboard-header">
+        <div class="user-info">
+            {{-- Verifica se o usuário está logado antes de mostrar o nome --}}
+            @auth
+                Olá, {{ Auth::user()->nome }}
+            @endauth
+        </div>
+        
+        {{-- O botão de logout deve estar dentro de um formulário --}}
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-button">Sair</button>
+        </form>
+    </div>
+
 
     <div class="dashboard-container">
         <h1>Dashboard CINEMAX</h1>

@@ -30,7 +30,16 @@
   <div class="login-wrapper">
     <div class="login-card">
       <h2>Login</h2>
-      <form action="{{route('contatos.index')}}" method="get">
+       @if ($errors->any())
+        <div style="margin-bottom: 1rem; color: #ff7b7b; background: rgba(229, 9, 20, 0.1); padding: 10px; border-radius: 6px;">
+            {{ $errors->first('email') }}
+        </div>
+    @endif
+
+    {{-- MUDE O MÉTODO PARA "post" E A ACTION PARA A ROTA CORRETA --}}
+    <form action="{{ route('login.do') }}" method="post">
+        @csrf {{-- ADICIONE O TOKEN DE SEGURANÇA --}}
+        
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
         <label for="senha">Senha</label>

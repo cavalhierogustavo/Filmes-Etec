@@ -29,7 +29,12 @@
       <div class="acoes-cabecalho">
         <input type="search" placeholder="Pesquisar" aria-label="Pesquisar" />
         <a href="login"><button class="botao pequeno">Entrar</button></a>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-button">Sair</button>
+        </form>
       </div>
+    
     </div>
   </header>
 

@@ -137,7 +137,7 @@ h3{max-width:800px;margin:0 auto 40px auto;text-align:center;font-weight:400;col
     <div class="acoes-cabecalho">
       <input type="search" placeholder="Pesquisar">
       <button class="botao pequeno">Entrar</button>
-      <a href="{{route('contato.index')}}"><button> Entre</button></a>
+      <a href="login"><button> Entre</button></a>
     </div>
   </div>
 </header>
@@ -147,12 +147,9 @@ h3{max-width:800px;margin:0 auto 40px auto;text-align:center;font-weight:400;col
 
 <div class="container equipe">
   <div class="card">
-    <img src="img/larissa.jpeg" alt="Larissa">
-    
-    @foreach($contatos as $contato)
-  <h4>{{ $contato->nome }}</h4>
-@endforeach
-    <p>Diretora de Conteúdo</p>
+    <img src="img/adrielMendingo.jpeg" alt="Larissa">
+        <h4>João</h4>
+    <p>Editor de Filmes</p>
   </div>
   <div class="card">
     <img src="img/gustavo.jpeg" alt="João">
@@ -160,14 +157,9 @@ h3{max-width:800px;margin:0 auto 40px auto;text-align:center;font-weight:400;col
     <p>Editor de Filmes</p>
   </div>
   <div class="card">
-    <img src="img/larissa.jpeg" alt="Maria">
+    <img src="img/larrisa.jpeg" alt="Maria">
     <h4>Maria</h4>
     <p>Design Gráfico</p>
-  </div>
-  <div class="card">
-    <img src="img/larissa.jpeg" alt="Carlos">
-    <h4>Carlos</h4>
-    <p>Desenvolvedor Web</p>
   </div>
 </div>
 

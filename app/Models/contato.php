@@ -3,10 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-// NOME DA CLASSE: Contato (maiúsculo)
-class Contato extends Model
+class Contato extends Authenticatable
 {
     use HasFactory;
 
@@ -15,8 +14,15 @@ class Contato extends Model
      *
      * @var array<int, string>
      */
-    // CORREÇÃO: 'CPF' para 'cpf', para bater com o banco de dados
-    protected $fillable = ['nome', 'email', 'senha', 'telefone', 'cpf','tipo','deleted'];
+    protected $fillable = [
+        'nome',
+        'email',
+        'senha',
+        'cpf',
+        'telefone',
+        'tipo',
+        'deleted',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -24,6 +30,18 @@ class Contato extends Model
      * @var array<int, string>
      */
     protected $hidden = [
-        'senha', // É uma boa prática não retornar a senha em respostas de API
+        'senha',
+        'remember_token',
     ];
+
+    /**
+     * Pega a senha para o usuário autenticado.
+     * Isso informa ao Laravel que sua coluna de senha se chama 'senha' e não 'password'.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
 }
