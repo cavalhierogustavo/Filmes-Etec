@@ -1,0 +1,172 @@
+:root{
+    --bg:#0b0b0b;
+    --card:#141414;
+    --muted:#bfc4c9;
+    --accent:#e50914;
+    --glass: rgba(255,255,255,0.04);
+    --max-width:1200px;
+    font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{height:100%; margin:0; background: linear-gradient(180deg,#070707 0%, #0b0b0b 100%); color:#fff;}
+  body{font-size:16px; line-height:1.4;}
+
+  .container{width:90%; max-width:var(--max-width); margin:0 auto;}
+
+  /* Navbar */
+  .cabecalho-site{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(57,57,57,0.85), rgba(11,11,11,0.6));
+  }
+  .cabecalho-conteudo{
+    display:flex;
+    align-items:center;
+    gap:200px;
+    padding:14px 0;
+  }
+  .marca .logo{
+    font-weight:1000;
+    color:var(--accent);
+    font-size:25px;
+  }
+  .navegacao-principal ul{
+    display:flex;
+    gap:25px;
+    list-style:none;
+    padding:0;
+    margin:0;
+  }
+  .navegacao-principal a{
+    color:#ddd;
+    text-decoration:none;
+    font-weight:500;
+    padding:6px 8px;
+    border-radius:4px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Efeito Suave */
+  }
+  .navegacao-principal a:hover,
+  .navegacao-principal a.ativo{
+    color:#fff;
+    background:rgba(255,255,255,0.04);
+  }
+  .acoes-cabecalho{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .acoes-cabecalho input[type="search"]{
+    display:none;
+  }
+  .botao{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.08);
+    color: #fff;
+    padding:8px 12px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:600;
+    text-decoration:none;
+  }
+  .botao.primario{
+    background:var(--accent);
+    border-color: transparent;
+    color:#fff;
+  }
+
+  /* Login form */
+  .login-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:80vh;
+  }
+  #cliente{
+    display: none;
+  }
+  .login-card{
+    background: var(--card);
+    padding: 40px;
+    border-radius:12px;
+    border: 1px solid var(--glass); /* Borda sutil para definir o card */
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    width:100%;
+    max-width:400px;
+  }
+  .login-card h2{
+    text-align:center;
+    margin-top: 0;
+    margin-bottom:30px;
+    font-weight:800;
+    color:#fff;
+  }
+  .login-card label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:500;
+    color:var(--muted);
+  }
+  .login-card input{
+    width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border-radius:6px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.02);
+    color:#fff;
+    font-size: 16px; /* Garante boa legibilidade */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* --- Efeito Suave --- */
+  }
+  
+  /* --- NOVO: Efeito de Foco no Input --- */
+  .login-card input:focus{
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.2);
+  }
+
+  .login-card input::placeholder{color:var(--muted);}
+  
+  .login-card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:6px;
+    background:var(--accent);
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* --- Efeito Suave --- */
+  }
+  .login-card button:hover{
+    background:#c40812; /* Um tom de vermelho um pouco mais escuro */
+  }
+
+  /* --- NOVO: Estilos para o link 'Não Tenho Login' --- */
+  .form-footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .form-footer a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+  }
+
+  .form-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  @media(max-width:500px){
+    .cabecalho-conteudo{gap:10px;}
+    .login-card{padding:30px;}
+  }
