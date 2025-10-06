@@ -17,6 +17,7 @@ class Filme extends Model
         'ano_lancamento',
         'diretor',
         'sinopse',
+        'deleted',
         'cartaz_path',
     ];
 

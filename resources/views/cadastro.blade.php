@@ -94,8 +94,8 @@
         <!-- O campo do CPF deve ser do tipo "text" para aceitar pontos e traços -->
         <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
 
-        <input type="text" name="tipo" id="cliente">
-        <input type="text" name="deleted" id="deleted">
+        <input type="hidden" name="tipo" id="cliente">
+        <input type="hidden" name="deleted" id="deleted">
         <button type="submit">Cadastrar</button>
       </form>
     </div>

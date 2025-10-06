@@ -27,43 +27,50 @@ class FilmeSeeder extends Seeder
                 'titulo' => 'O Poderoso Chefão',
                 'ano_lancamento' => 1972,
                 'diretor' => 'Francis Ford Coppola',
-                'sinopse' => 'A saga da família Corleone, uma das mais poderosas da máfia italiana em Nova York.'
+                'sinopse' => 'A saga da família Corleone, uma das mais poderosas da máfia italiana em Nova York.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'A Origem',
                 'ano_lancamento' => 2010,
                 'diretor' => 'Christopher Nolan',
-                'sinopse' => 'Um ladrão que rouba informações ao entrar nos sonhos das pessoas recebe a tarefa inversa: plantar uma ideia.'
+                'sinopse' => 'Um ladrão que rouba informações ao entrar nos sonhos das pessoas recebe a tarefa inversa: plantar uma ideia.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'Matrix',
                 'ano_lancamento' => 1999,
                 'diretor' => 'Lana & Lilly Wachowski',
-                'sinopse' => 'Um jovem programador descobre que sua realidade é uma simulação e se junta a uma rebelião.'
+                'sinopse' => 'Um jovem programador descobre que sua realidade é uma simulação e se junta a uma rebelião.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'Pulp Fiction: Tempo de Violência',
                 'ano_lancamento' => 1994,
                 'diretor' => 'Quentin Tarantino',
-                'sinopse' => 'Várias histórias interligadas de crime e redenção em Los Angeles.'
+                'sinopse' => 'Várias histórias interligadas de crime e redenção em Los Angeles.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'A Viagem de Chihiro',
                 'ano_lancamento' => 2001,
                 'diretor' => 'Hayao Miyazaki',
-                'sinopse' => 'Uma jovem garota se perde em um mundo de deuses, espíritos e monstros.'
+                'sinopse' => 'Uma jovem garota se perde em um mundo de deuses, espíritos e monstros.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'Parasita',
                 'ano_lancamento' => 2019,
                 'diretor' => 'Bong Joon Ho',
-                'sinopse' => 'Uma família pobre se infiltra na vida de uma família rica, com consequências inesperadas.'
+                'sinopse' => 'Uma família pobre se infiltra na vida de uma família rica, com consequências inesperadas.',
+                'deleted' => '0'
             ],
             [
                 'titulo' => 'O Senhor dos Anéis: A Sociedade do Anel',
                 'ano_lancamento' => 2001,
                 'diretor' => 'Peter Jackson',
-                'sinopse' => 'Um hobbit herda um anel poderoso e deve embarcar em uma jornada perigosa para destruí-lo.'
+                'sinopse' => 'Um hobbit herda um anel poderoso e deve embarcar em uma jornada perigosa para destruí-lo.',
+                'deleted' => '0'
             ],
         ];
 

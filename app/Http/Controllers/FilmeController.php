@@ -5,21 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Filme;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Storage; // IMPORTANTE: Adicionar o import do Storage
 
 class FilmeController extends Controller
 {
+    /**
+     * MÉTODO FALTANTE: Lista todos os filmes para a página de gerenciamento.
+     */
+    public function index()
+    {
+        
+        $filmes = Filme::where('deleted', 0) // <-- SÓ PEGA FILMES ONDE 'deleted' É 0
+                   ->orderBy('created_at', 'desc')
+                   ->get();
+
+        // Retorna a view de gerenciamento que criamos (filmes/index.blade.php)
+        return view('filmes.index', ['filmes' => $filmes]);
+    }
+
     /**
      * Mostra o formulário para criar um novo filme.
      */
     public function create()
     {
-    $categorias = Categoria::orderBy('nome')->get();
+        $categorias = Categoria::orderBy('nome')->get();
 
-        // 3. Envia a variável $categorias para a view
+        // CORREÇÃO: Removido o return duplicado.
         return view('create', [
             'categorias' => $categorias
         ]);
-        return view('create');
     }
 
     /**
@@ -27,36 +41,87 @@ class FilmeController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Validação dos dados
-         $validated = $request->validate([
+        $validated = $request->validate([
             'titulo' => 'required|string|max:255',
             'ano_lancamento' => 'required|integer|min:1895',
             'diretor' => 'required|string|max:255',
             'sinopse' => 'nullable|string',
             'cartaz' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'categorias' => 'required|array', // Garante que 'categorias' seja enviado e seja um array
-            'categorias.*' => 'exists:categorias,id' // Garante que cada ID de categoria enviado exista na tabela 'categorias'
+            'categorias' => 'required|array',
+            'categorias.*' => 'exists:categorias,id'
+            
         ]);
 
-        $path = null;
-        if ($request->hasFile('cartaz')) {
-            $path = $request->file('cartaz')->store('public/cartazes');
-        }
+        // O 'if' aqui é desnecessário, pois o campo é 'required'. Mas não causa erro.
+        $path = $request->file('cartaz')->store('public/cartazes');
 
-        // 2. Cria o filme no banco de dados (usando os dados validados)
         $filme = Filme::create([
             'titulo' => $validated['titulo'],
             'ano_lancamento' => $validated['ano_lancamento'],
             'diretor' => $validated['diretor'],
             'sinopse' => $validated['sinopse'],
-            'cartaz_path' => $path
+            'cartaz_path' => $path,
+            'deleted' => 0,
         ]);
 
-        // 3. Associa as categorias ao filme recém-criado
-        // O método attach() é usado para salvar relações "Muitos-para-Muitos"
         $filme->categorias()->attach($validated['categorias']);
 
-        // 4. Redireciona de volta com uma mensagem de sucesso
-        return redirect()->route('filmes.create')->with('success', 'Filme cadastrado com sucesso!');
+        // CORREÇÃO: Redireciona para a PÁGINA DE LISTAGEM (gerenciamento) após o cadastro.
+        return redirect()->route('filmes.index')->with('success', 'Filme cadastrado com sucesso!');
+    }
+
+    /**
+     * Mostra o formulário para editar um filme existente.
+     */
+    public function edit(Filme $filme)
+    {
+        $categorias = Categoria::all(); // Pega todas as categorias para o select
+        return view('filmes.edit', [
+            'filme' => $filme, // Envia o filme que será editado
+            'categorias' => $categorias
+        ]);
+    }
+
+    /**
+     * Atualiza um filme no banco de dados.
+     */
+    public function update(Request $request, Filme $filme)
+    {
+        $validated = $request->validate([
+            'titulo' => 'required|string|max:255',
+            'ano_lancamento' => 'required|integer|min:1895',
+            'diretor' => 'required|string|max:255',
+            'sinopse' => 'nullable|string',
+            'cartaz' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'categorias' => 'required|array',
+            'categorias.*' => 'exists:categorias,id'
+        ]);
+
+        if ($request->hasFile('cartaz')) {
+            if ($filme->cartaz_path) {
+                Storage::delete($filme->cartaz_path);
+            }
+            $validated['cartaz_path'] = $request->file('cartaz')->store('public/cartazes');
+        }
+
+        $filme->update($validated);
+
+        $filme->categorias()->sync($validated['categorias']);
+
+        return redirect()->route('filmes.index')->with('success', 'Filme atualizado com sucesso!');
+    }
+
+    /**
+     * Remove um filme do banco de dados.
+     */
+    public function destroy(Filme $filme)
+    {
+        if ($filme->cartaz_path) {
+            Storage::delete($filme->cartaz_path);
+        }
+
+        $filme->delete();
+
+        return redirect()->route('filmes.index')->with('success', 'Filme deletado com sucesso!');
     }
 }

@@ -67,6 +67,7 @@
             <div>
                 <label for="titulo">Título do Filme</label>
                 <input type="text" id="titulo" name="titulo" value="{{ old('titulo') }}" required>
+                <input type="text" id="deleted" name="deleted" value="0" >
             </div>
 
             <div>

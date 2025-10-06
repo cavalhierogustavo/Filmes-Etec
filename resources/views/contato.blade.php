@@ -36,32 +36,33 @@
   <header class="cabecalho-site">
     <div class="container cabecalho-conteudo">
       <div class="marca">
-        <a href="#" aria-label="CINEMAX"><span class="logo">CINEMAX</span></a>
+        <a href="/" aria-label="CINEMAX"><span class="logo">CINEMAX</span></a>
       </div>
       <nav class="navegacao-principal" aria-label="Navegação principal">
         <ul>
           <li><a href="/">Filmes</a></li>
           <li><a href="#">Cinema</a></li>
-          <li><a href="quemsomos">Quem Somos</a></li>
-          <li><a href="contato">Contato</a></li>
+          <li><a href="{{ url('/quemsomos') }}">Quem Somos</a></li>
+          <li><a href="{{ url('/contato') }}">Contato</a></li>
         </ul>
       </nav>
       <div class="acoes-cabecalho">
-        <a href="login" class="botao primario">Entrar</a>
+        <a href="{{ route('login') }}" class="botao primario">Entrar</a>
       </div>
     </div>
   </header>
 
-  <div class="cadastro-wrapper">
+  <main class="cadastro-wrapper">
     <div class="cadastro-card">
-      <h2>Cadastro Para Admin</h2>
+      <h2>Crie sua Conta de Admin</h2>
+
+      {{-- Mensagens de feedback do Laravel (Blade) --}}
       @if (session('success'))
         <div class="feedback-message success">
             {{ session('success') }}
         </div>
-    @endif
-
-    @if ($errors->any())
+      @endif
+      @if ($errors->any())
         <div class="feedback-message error">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -69,42 +70,45 @@
                 @endforeach
             </ul>
         </div>
-        
-    @endif
+      @endif
 
+      {{-- Div para feedback do JavaScript (AJAX) --}}
+      <div id="feedback" style="display: none;"></div>
 
-      <div id="feedback" class="feedback-message" style="display: none;"></div>
+      <form id="cadastroForm" action="{{ route('cadastro.store') }}" method="post">
+        @csrf
+        <input type="hidden" name="tipo" value="admin">
+        <input type="hidden" name="deleted" value="0">
 
-      
-      <form id="cadastroForm" action="{{route('cadastro.store')}}" method="post">
-       @csrf
-       <input type="hidden" name="tipo" value="admin">
-       <input type="hidden" name="deleted" value="0">
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+        <div class="form-group">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+        </div>
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+        </div>
 
-        <label for="senha">Senha</label>
-        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" name="senha" placeholder="Crie uma senha forte" required>
+        </div>
 
-        <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx" required>
+        </div>
 
-        <label for="cpf">CPF</label>
-
-        <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
+        <div class="form-group">
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+        </div>
 
         <button type="submit">Cadastrar</button>
       </form>
     </div>
-  </div>
-
-<script src="js/cadastro.js"></script>
-<head>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-</head>
+  </main>
 
 <script>
     

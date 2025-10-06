@@ -5,43 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CINEMAX — Home</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/home.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  {{-- Use o helper asset para garantir que o caminho para o CSS esteja sempre correto --}}
+  <link rel="stylesheet" href="{{ asset('css/home.css' ) }}">
 </head>
 <body>
   <header class="cabecalho-site">
     <div class="container cabecalho-conteudo">
-      <div class="marca">
-        <a href="#" aria-label="AdrielFlix">
-          <span class="logo">CINEMAX</span>
-        </a>
-      </div>
+      <a href="/" class="marca" aria-label="CINEMAX">
+        <span class="logo">CINEMAX</span>
+      </a>
 
       <nav class="navegacao-principal" aria-label="Navegação principal">
         <ul>
-          <li><a href="#">Filmes</a></li>
+          <li><a href="#" class="ativo">Filmes</a></li>
           <li><a href="#">Cinema</a></li>
-          <li><a href="quemsomos">Quem Somos</a></li>
+          <li><a href="{{ url('/quemsomos') }}">Quem Somos</a></li>
           <li><a href="#">Contato</a></li>
         </ul>
       </nav>
 
       <div class="acoes-cabecalho">
         <input type="search" placeholder="Pesquisar" aria-label="Pesquisar" />
-        <a href="login"><button class="botao pequeno">Entrar</button></a>
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="logout-button">Sair</button>
-        </form>
+        @guest
+            <a href="{{ route('login') }}"><button class="botao primario">Entrar</button></a>
+        @endguest
+        @auth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="botao">Sair</button>
+            </form>
+        @endauth
       </div>
-    
     </div>
   </header>
 
   <section class="destaque">
     <div class="sobreposicao-destaque"></div>
     <picture class="midia-destaque">
-      <img src="img/superman.jpg">
+      {{-- Adicione uma imagem de fallback ou use a do primeiro filme, se existir --}}
+      <img src="{{ asset('img/adrielMendingo.jpeg') }}" alt="Cena de filme em destaque">
     </picture>
 
     <div class="container conteudo-destaque">
@@ -49,8 +52,8 @@
       <p class="subtitulo">Prepare a pipoca, a sessão já vai começar.</p>
 
       <div class="acoes-destaque">
-        <button class="botao grande primario">Ingressos</button>
-        <a href="http://"><button class="botao grande fantasma">→</button></a>
+        <button class="botao primario">Ver Ingressos</button>
+        <button class="botao">Assistir Trailer →</button>
       </div>
     </div>
   </section>
@@ -59,50 +62,49 @@
     <section class="linha">
         <div class="cabecalho-linha">
             <h2>Filmes em Cartaz</h2>
-            <a href="#" class="ver-tudo">Ver tudo →</a>
+            @auth
+                <a href="{{ route('filmes.index') }}" class="ver-tudo">Gerenciar filmes →</a>
+            @endauth
         </div>
 
-        <div class="cartoes" aria-label="Populares da semana">
-            
+        <div class="cartoes" aria-label="Filmes populares">
             @forelse ($filmes as $filme)
-                <article class="cartao">
-                    
-                    @if ($filme->cartaz_path)
-                        <img src="{{ Storage::url($filme->cartaz_path) }}" alt="Cartaz do filme {{ $filme->titulo }}">
-                    @else
-                        <img src="https://via.placeholder.com/300x450.png?text=Sem+Imagem" alt="Sem imagem">
-                    @endif
-
+                {{-- O card inteiro agora é um link para a página de detalhes (se houver) --}}
+                <a href="#" class="cartao">
+                    <div class="cartao-imagem-wrapper">
+                        @if ($filme->cartaz_path)
+                            <img src="{{ Storage::url($filme->cartaz_path) }}" alt="Cartaz do filme {{ $filme->titulo }}">
+                        @else
+                            <img src="https://via.placeholder.com/440x660.png?text=Sem+Imagem" alt="Sem imagem">
+                        @endif
+                    </div>
                     <div class="corpo-cartao">
                         <h3>{{ $filme->titulo }}</h3>
-                        
                         <p class="meta">
-                            @if ($filme->categorias->isNotEmpty())
+                            @if ($filme->categorias->isNotEmpty( ))
                                 {{ $filme->categorias->first()->nome }}
                             @endif
                             • {{ $filme->ano_lancamento }}
                         </p>
                     </div>
-                </article>
+                </a>
             @empty
-                <p style="color: var(--muted); width: 100%; text-align: center;">
+                <p style="color: var(--muted); width: 100%; text-align: center; grid-column: 1 / -1;">
                     Ainda não há filmes cadastrados.
                 </p>
             @endforelse
-            </div>
+        </div>
     </section>
-    
-    </main>
+ </main>
 
   <footer class="rodape-site">
     <div class="container conteudo-rodape">
       <div>
-        <p><strong>AdrielFlix</strong> © <span id="ano"></span></p>
-        <p class="pequeno">Telefone: (xx) xxxx-xxxx • Suporte: suporte@adrielflix.com</p>
+        <p><strong>CINEMAX</strong> &copy; <span id="ano"></span>. Todos os direitos reservados.</p>
+        <p class="pequeno">Telefone: (11) 97646-9961 • Suporte: suporte@cinemax.com</p>
       </div>
-
       <div class="links-rodape">
-        <a href="#">Termos</a>
+        <a href="#">Termos de Uso</a>
         <a href="#">Privacidade</a>
         <a href="#">Ajuda</a>
       </div>
@@ -111,28 +113,6 @@
 
   <script>
     document.getElementById('ano').textContent = new Date().getFullYear();
-    const carrossel = document.querySelector('.carrossel');
-    if (carrossel) {
-      let estaPressionado = false;
-      let inicioX, scrollEsquerda;
-      const faixa = carrossel.querySelector('.faixa-carrossel');
-
-      carrossel.addEventListener('mousedown', (e) => {
-        estaPressionado = true;
-        carrossel.classList.add('arrastando');
-        inicioX = e.pageX - carrossel.offsetLeft;
-        scrollEsquerda = faixa.scrollLeft;
-      });
-      carrossel.addEventListener('mouseleave', () => { estaPressionado = false; carrossel.classList.remove('arrastando'); });
-      carrossel.addEventListener('mouseup', () => { estaPressionado = false; carrossel.classList.remove('arrastando'); });
-      carrossel.addEventListener('mousemove', (e) => {
-        if(!estaPressionado) return;
-        e.preventDefault();
-        const x = e.pageX - carrossel.offsetLeft;
-        const deslocamento = (x - inicioX) * 1.5;
-        faixa.scrollLeft = scrollEsquerda - deslocamento;
-      });
-    }
   </script>
 </body>
 </html>

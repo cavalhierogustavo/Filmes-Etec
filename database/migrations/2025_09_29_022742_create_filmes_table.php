@@ -17,6 +17,8 @@ return new class extends Migration
         $table->integer('ano_lancamento');
         $table->string('diretor')->nullable();
         $table->text('sinopse')->nullable();
+        $table->text('deleted');
+
         $table->string('cartaz_path')->nullable();
         $table->timestamps();
     });

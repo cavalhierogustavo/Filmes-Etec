@@ -4,14 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\User; // Você não usou, mas pode deixar para o futuro
+use App\Models\User;
 use App\Models\Filme;
+use App\Models\Categoria;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        // Consulta 1: Contando quantos filmes existem em cada categoria
+
+        $TotalFilme = Filme::count('filmes.id');
+        $TotalCategorais = Categoria::count('categorias.id');
+
+        
         $filmesPorCategoria = DB::table('categorias')
             ->join('categoria_filme', 'categorias.id', '=', 'categoria_filme.categoria_id')
             ->select('categorias.nome', DB::raw('COUNT(categoria_filme.filme_id) as total_filmes'))
@@ -46,6 +51,8 @@ class DashboardController extends Controller
             'anoFilmeMaisRecente' => $anoFilmeMaisRecente,
             'anoFilmeMaisAntigo' => $anoFilmeMaisAntigo,
             'filmesPorAno' => $filmesPorAno,
+            'TotalFilmes' => $TotalFilme,
+            'totalCategorias' => $TotalCategorais
         ]);
     }
 }
