@@ -210,6 +210,12 @@
                 <h3>Filme Mais Antigo</h3>
                 <p>{{ $anoFilmeMaisAntigo ?? 'N/D' }}</p>
             </div>
+            <div class="stat-card">
+                <h3>Filme Mais Antigo</h3>
+                <p>{{ $anoFilmeMaisAntigo ?? 'N/D' }}</p>
+            </div>
+            <div>
+
         </section>
 
         <section class="charts-grid">
@@ -225,14 +231,11 @@
     </main>
 
 <script type="text/javascript">
-    // O seu código JavaScript para os gráficos continua perfeito.
-    // Nenhuma alteração é necessária aqui.
-    // ... (cole o seu <script> original aqui) ...
     var chartCategoriasDom = document.getElementById('chart-categorias');
     var chartCategorias = echarts.init(chartCategoriasDom);
     const filmesPorCategoria = @json($filmesPorCategoria);
 
-    // Mudei para um gráfico de Pizza (Donut), fica mais interessante para categorias
+    
     var optionCategorias = {
         tooltip: {
             trigger: 'item'
@@ -245,7 +248,7 @@
         series: [{
             name: 'Filmes',
             type: 'pie',
-            radius: ['40%', '70%'], // Cria o efeito "donut"
+            radius: ['40%', '70%'],
             avoidLabelOverlap: false,
             label: { show: false, position: 'center' },
             emphasis: {
@@ -253,7 +256,7 @@
             },
             labelLine: { show: false },
             data: filmesPorCategoria.map(item => ({ value: item.total_filmes, name: item.nome })),
-            color: ['#b950daff','#403742ff', '#313b92ff', '#e25b1cff', '#ff00ffff', '#4e240bff', '#ff0000ff'] // Paleta de cores
+            color: ['	#4D86F0','#F5432F', '#F5912F', '#FFD700', '#51F567', '#FF69ED', '#B80802'] // Paleta de cores
         }]
     };
     chartCategorias.setOption(optionCategorias);

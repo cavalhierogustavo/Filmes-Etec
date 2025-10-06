@@ -6,7 +6,7 @@
     <title>Editando: {{ $filme->titulo }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- GERAL E VARIÁVEIS --- */
+        
         :root {
             --bg: #0b0b0b;
             --card: #141414;
@@ -30,7 +30,7 @@
             min-height: 100vh;
         }
 
-        /* --- CONTAINER DO FORMULÁRIO --- */
+        
         .form-container {
             background-color: var(--card);
             border: 1px solid var(--border);
@@ -41,7 +41,7 @@
             box-shadow: 0 10px 40px var(--shadow);
         }
 
-        /* --- CABEÇALHO DO FORMULÁRIO --- */
+        
         .form-header {
             text-align: center;
             margin-bottom: 2.5rem;
@@ -64,7 +64,7 @@
             text-decoration: underline;
         }
 
-        /* --- GRUPOS DE CAMPOS --- */
+        
         .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -77,7 +77,7 @@
             grid-column: 1 / -1;
         }
 
-        /* --- ESTILO DOS CAMPOS --- */
+        
         label {
             display: block;
             margin-bottom: 0.5rem;
@@ -116,7 +116,7 @@
             display: block;
         }
 
-        /* --- UPLOAD DE ARQUIVO --- */
+        
         .file-upload-group {
             display: flex;
             gap: 1.5rem;
@@ -133,7 +133,7 @@
             flex-grow: 1;
         }
 
-        /* --- BOTÕES --- */
+        
         .form-actions {
             margin-top: 2.5rem;
             display: flex;
@@ -171,7 +171,7 @@
             color: var(--text);
         }
 
-        /* --- CAIXA DE ERRO --- */
+        
         .error-box {
             background-color: rgba(178, 7, 16, 0.2);
             border: 1px solid var(--danger);

@@ -6,7 +6,7 @@
     <title>Gerenciar Filmes - CINEMAX</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- GERAL E VARIÁVEIS --- */
+        
         :root {
             --bg: #0b0b0b;
             --card: #141414;
@@ -29,7 +29,7 @@
             padding: 2rem;
         }
 
-        /* --- CABEÇALHO DA PÁGINA --- */
+        
         .page-header {
             display: flex;
             flex-wrap: wrap;
@@ -65,7 +65,7 @@
             color: var(--text);
         }
 
-        /* --- MENSAGEM DE SUCESSO --- */
+        
         .alert-success {
             background-color: rgba(31, 135, 61, 0.2);
             border: 1px solid var(--success);
@@ -77,19 +77,19 @@
             font-weight: 500;
         }
 
-        /* --- GRID DE CARDS --- */
+        
         .filmes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 2rem;
         }
 
-        /* --- ESTILO DO CARD --- */
+        
         .card {
             background: var(--card);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid transparent; /* Borda inicial transparente */
+            border: 1px solid transparent;
             box-shadow: 0 8px 30px var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             text-decoration: none;
@@ -107,7 +107,7 @@
             overflow: hidden;
             position: relative;
         }
-        .card-image-wrapper::after { /* Efeito de vinheta na imagem */
+        .card-image-wrapper::after {
             content: '';
             position: absolute;
             inset: 0;
@@ -129,7 +129,7 @@
             padding: 1.25rem;
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+            flex-grow: 1;
         }
         .card-content h3 {
             margin: 0;
@@ -145,7 +145,7 @@
             margin-top: 0.5rem;
         }
         .card-content .edit-link {
-            margin-top: auto; /* Empurra o link para o final do card */
+            margin-top: auto;
             padding-top: 1rem;
             color: var(--accent);
             font-weight: 600;
@@ -169,7 +169,7 @@
             <h1>Gerenciar Filmes</h1>
             <div class="header-actions">
                 {{-- Botão para voltar ao Dashboard --}}
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary">← Voltar ao Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary">Voltar ao Dashboard</a>
                 
                 {{-- Botão para cadastrar um novo filme --}}
                 <a href="{{ route('filmes.create') }}" class="btn btn-primary">Cadastrar Novo Filme</a>

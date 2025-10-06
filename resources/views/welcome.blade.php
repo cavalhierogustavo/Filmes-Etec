@@ -19,9 +19,8 @@
       <nav class="navegacao-principal" aria-label="Navegação principal">
         <ul>
           <li><a href="#" class="ativo">Filmes</a></li>
-          <li><a href="#">Cinema</a></li>
-          <li><a href="{{ url('/quemsomos') }}">Quem Somos</a></li>
-          <li><a href="#">Contato</a></li>
+          <li><a href="quemsomos">Quem Somos</a></li>
+          <li><a href="contato">Contato</a></li>
         </ul>
       </nav>
 

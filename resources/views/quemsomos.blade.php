@@ -19,7 +19,7 @@
     <nav class="navegacao-principal">
       <ul>
         <li><a href="/">Filmes</a></li>
-        <li><a href="{{ url('/quemsomos') }}" class="ativo">Quem Somos</a></li>
+        <li><a href="#" class="ativo">Quem Somos</a></li>
         <li><a href="contato">Contato</a></li>
       </ul>
     </nav>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="info">
                         <h4>Adriel</h4>
-                        <p>Editor</p>
+                        <p>faxineiro</p>
                     </div>
                 </div>
                 <div class="card-membro">
@@ -59,7 +59,7 @@
                     </div>
                     <div class="info">
                         <h4>Gustavo</h4>
-                        <p>Criador</p>
+                        <p>segurança</p>
                     </div>
                 </div>
                 <div class="card-membro">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="info">
                         <h4>Larissa</h4>
-                        <p>Chefe de cozinha</p>
+                        <p>Front end</p>
                     </div>
                 </div>
             </div>

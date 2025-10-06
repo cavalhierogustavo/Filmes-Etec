@@ -6,10 +6,9 @@
    <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>CINEMAX — Cadastro</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <!-- Se o seu CSS estiver na pasta public/css, o link deve ser assim: -->
+
   <link rel="stylesheet" href="{{ asset('css/cadastro.css') }}">
   <style>
-    /* Estilos para as mensagens de feedback */
     .feedback-message {
       padding: 1rem;
       border-radius: 8px;
@@ -41,7 +40,6 @@
       <nav class="navegacao-principal" aria-label="Navegação principal">
         <ul>
           <li><a href="/">Filmes</a></li>
-          <li><a href="#">Cinema</a></li>
           <li><a href="quemsomos">Quem Somos</a></li>
           <li><a href="contato">Contato</a></li>
         </ul>
@@ -91,7 +89,7 @@
         <input type="tel" id="telefone" name="telefone" placeholder="Digite seu telefone" required>
 
         <label for="cpf">CPF</label>
-        <!-- O campo do CPF deve ser do tipo "text" para aceitar pontos e traços -->
+        
         <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF" required>
 
         <input type="hidden" name="tipo" id="cliente">
@@ -107,29 +105,29 @@
 </head>
 
 <script>
-    // Seleciona o formulário e a div de feedback
+    
     const form = document.getElementById('cadastroForm');
     const feedbackDiv = document.getElementById('feedback');
 
-    // Adiciona um "ouvinte" para o evento de envio do formulário
+    
     form.addEventListener('submit', function (event) {
-        // 1. Previne o envio padrão (que recarrega a página)
+        
         event.preventDefault();
 
-        // Limpa mensagens antigas
+        
         feedbackDiv.style.display = 'none';
         feedbackDiv.innerHTML = '';
         feedbackDiv.className = 'feedback-message';
 
-        // 2. Pega os dados do formulário
+        
         const formData = new FormData(form);
 
-        // 3. Envia os dados usando Fetch API (AJAX)
+        
         fetch('{{ route('cadastro.store') }}', {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                'Accept': 'application/json', // Informa que esperamos JSON
+                'Accept': 'application/json', 
             },
             body: formData
         })
@@ -156,10 +154,10 @@
                 errorList += '</ul>';
                 feedbackDiv.innerHTML = errorList;
             }
-            feedbackDiv.style.display = 'block'; // Mostra a div de feedback
+            feedbackDiv.style.display = 'block'; 
         })
         .catch(error => {
-            // Erro de rede ou outro problema
+            
             feedbackDiv.classList.add('error');
             feedbackDiv.textContent = 'Ocorreu um erro inesperado. Tente novamente.';
             feedbackDiv.style.display = 'block';

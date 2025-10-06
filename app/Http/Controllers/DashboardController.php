@@ -16,6 +16,7 @@ class DashboardController extends Controller
         $TotalFilme = Filme::count('filmes.id');
         $TotalCategorais = Categoria::count('categorias.id');
 
+
         
         $filmesPorCategoria = DB::table('categorias')
             ->join('categoria_filme', 'categorias.id', '=', 'categoria_filme.categoria_id')

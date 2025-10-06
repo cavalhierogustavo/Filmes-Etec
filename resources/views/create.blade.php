@@ -6,7 +6,7 @@
     <title>CINEMAX — Cadastrar Novo Filme</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* O seu CSS continua o mesmo, sem alterações */
+        
         :root {
             --bg: #0b0b0b; --card: #141414; --border: rgba(255, 255, 255, 0.08);
             --text: #ffffff; --muted: #bfc4c9; --accent: #e50914; --success: #155724;
