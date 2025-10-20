@@ -112,6 +112,11 @@
             border: 1px solid var(--border);
             color: var(--text);
         }
+        .botao {
+            background-color: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
 
         /* --- CARDS DE ESTATÍSTICAS --- */
         .stats-grid {
@@ -227,6 +232,10 @@
                 <h2>Filmes Lançados por Ano</h2>
                 <div id="chart-anos" style="width: 100%; height: 400px;"></div>
             </div>
+
+            <a class="btn btn-primary" href="download-csv">Baixar Lista de Filmes</a>
+            <a class="btn btn-primary" href="downloadcategoria-csv">Baixar Categorias</a>
+
         </section>
     </main>
 

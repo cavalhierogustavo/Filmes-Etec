@@ -5,7 +5,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FilmeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\FuncionarioController;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -71,6 +73,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //    Esta rota será necessária para o botão "Deletar".
     Route::delete('/admin/filmes/{filme}', [FilmeController::class, 'destroy'])->name('filmes.destroy');
 });
+
+Route::get('/download-csv', 'App\Http\Controllers\FuncionarioController@download')->name('download.csv');
+Route::get('/downloadcategoria-csv', 'App\Http\Controllers\FuncionarioController@downloadCategorias')->name('downloadcategoria.csv');
 
 Route::post('/logout', function (Request $request) { // A mágica acontece aqui!
     Auth::logout();
