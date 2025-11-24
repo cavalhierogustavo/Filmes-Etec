@@ -15,9 +15,9 @@
       </div>
       <nav class="navegacao-principal" aria-label="Navegação principal">
         <ul>
-          <li><a href="/">Filmes</a></li>
-          <li><a href="quemsomos">Quem Somos</a></li>
-          <li><a href="contato">Contato</a></li>
+          <li><a href="/">@lang('texts.filmes')</a></li>
+          <li><a href="quemsomos">@lang('texts.quem-somos')</a></li>
+          <li><a href="contato">@lang('texts.contato')</a></li>
         </ul>
       </nav>
       <div class="acoes-cabecalho">
@@ -28,7 +28,7 @@
 
   <main class="login-wrapper">
     <div class="login-card">
-      <h2>Acessar Painel</h2>
+      <h2>Login</h2>
 
       @if ($errors->any())
         <div class="error-message">
@@ -41,18 +41,18 @@
         
         <div class="form-group">
             <label for="email">E-mail *</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required value="{{ old('email') }}">
+            <input type="email" id="email" name="email" placeholder="{{ __('texts.email') }}" required value="{{ old('email') }}">
         </div>
         
         <div class="form-group">
-            <label for="senha">Senha *</label>
-            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            <label for="senha">@lang('texts.options') *</label>
+            <input type="password" id="senha" name="senha" placeholder="@lang('texts.options')" required>
         </div>
 
-        <button type="submit">Entrar</button>
+        <button type="submit">@lang('texts.enter')</button>
 
         <div class="form-footer">
-          <a href="{{ url('/cadastros') }}">Não tenho uma conta</a>
+          <a href="{{ url('/cadastros') }}">@lang('texts.register')</a>
         </div>
       </form>
     </div>
