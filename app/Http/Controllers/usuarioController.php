@@ -16,8 +16,15 @@ public function login(Request $request)
 {
     
     $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'senha' => ['required'],
+       'email' => ['required', 'email', 'min:5'],
+        'senha' => ['required', 'min:6']
+    ],[
+        'email.required' => 'O campo e-mail é obrigatório.',
+        'email.email' => 'Digite um e-mail válido.',
+        'email.min' => 'O e-mail deve ter pelo menos 5 caracteres.',
+
+        'senha.required' => 'O campo senha é obrigatório.',
+        'senha.min' => 'A senha deve ter pelo menos 6 caracteres.'
     ]);
 
     

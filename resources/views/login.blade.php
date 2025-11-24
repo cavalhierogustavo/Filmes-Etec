@@ -40,12 +40,12 @@
         @csrf
         
         <div class="form-group">
-            <label for="email">E-mail</label>
+            <label for="email">E-mail *</label>
             <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required value="{{ old('email') }}">
         </div>
         
         <div class="form-group">
-            <label for="senha">Senha</label>
+            <label for="senha">Senha *</label>
             <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
         </div>
 
